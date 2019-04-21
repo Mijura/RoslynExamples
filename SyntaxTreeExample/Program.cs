@@ -1,7 +1,8 @@
 ﻿using Microsoft.CodeAnalysis.CSharp;
+using RoslynExamples;
 using System.IO;
 
-namespace RoslynExamples
+namespace SyntaxTreeExample
 {
     class Program
     {
