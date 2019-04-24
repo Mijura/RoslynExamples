@@ -15,12 +15,12 @@ namespace SyntaxTreeExample
             TreeWalker treeWalker = new TreeWalker();
             //visit and display syntax tree
             treeWalker.Visit(tree.GetRoot());
-            var hello = new HelloWorld();
+            var hello = new MladenWorld();
             hello.printHello();
         }
     }
     [DuplicateWithSuffix("World")]
-    public class Hello {
+    public class Mladen {
         public void printHello() {
             Console.WriteLine("Hello world");
         }

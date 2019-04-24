@@ -1,8 +1,6 @@
 ﻿using CodeGeneration.Roslyn;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using Validation;
 
 namespace CodeGenerator
