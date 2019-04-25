@@ -10,7 +10,7 @@ namespace SymbolApiExample
         {
             //workspace api
             var work = MSBuildWorkspace.Create();
-            var solution = work.OpenSolutionAsync(@"..\..\..\RoslynExample.sln").Result;
+            var solution = work.OpenSolutionAsync(@"..\..\..\..\RoslynExamples.sln").Result;
             var project = solution.Projects.FirstOrDefault(p => p.Name == "SymbolApiExample");
             if (project == null)
                 throw new Exception("Could not find the SymbolApiExample project.");
