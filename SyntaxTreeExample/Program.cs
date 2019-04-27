@@ -6,7 +6,9 @@ using System.IO;
 
 namespace SyntaxTreeExample
 {
-    
+    /**
+     * Syntax Tree API examples.
+     */
     class Program
     {
         static void Main(string[] args)
@@ -16,13 +18,13 @@ namespace SyntaxTreeExample
             //visit and display syntax tree
             treeWalker.Visit(tree.GetRoot());
             var hello = new MladenWorld();
-            hello.printHello();
+            hello.PrintHello();
         }
     }
     [DuplicateWithSuffix("World")]
     public class Mladen {
-        public void printHello() {
-            Console.WriteLine("Hello world");
+        public void PrintHello() {
+            Console.WriteLine("\n\nHello world!");
         }
     }
 

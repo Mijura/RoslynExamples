@@ -6,11 +6,13 @@ using System.Linq;
 
 namespace SymbolApiExample
 {
+    /**
+     * Symbol API (Workspace API) examples.
+     */
     class Program
     {
         static void Main(string[] args)
         {
-            //workspace api
             MSBuildLocator.RegisterDefaults();
 
             var work = MSBuildWorkspace.Create();
@@ -32,6 +34,11 @@ namespace SymbolApiExample
                     .Where(item => item.CanBeReferencedByName))
                 {
                     Console.WriteLine("\t{0}:{1}", item.TypeKind, item.Name);
+                    foreach (var innerItem in item.GetMembers()
+                        .Where(innerItem => innerItem.CanBeReferencedByName))
+                    {
+                        Console.WriteLine("\t\t{0}:{1}", innerItem.Kind, innerItem.Name);
+                    }
                 }
             }
         }
