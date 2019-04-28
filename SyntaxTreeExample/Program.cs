@@ -1,6 +1,7 @@
 ﻿using CodeGenerator;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using RoslynExamples;
 using System;
 using System.IO;
@@ -13,14 +14,14 @@ namespace SyntaxTreeExample
      */
     class Program
     {
-
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var repeat = true;
             while (repeat) {
                 Console.WriteLine("1 - Display Syntax Tree Example");
                 Console.WriteLine("2 - Class Created in Design Time Example");
                 Console.WriteLine("3 - Display First Error Example");
+                Console.WriteLine("4 - Display First Method");
                 Console.WriteLine("0 - Exit");
                 Console.Write("\nChoose option: ");
 
@@ -39,6 +40,9 @@ namespace SyntaxTreeExample
                     case 3:
                         DisplayFirstErrorExample();
                         break;
+                    case 4:
+                        DisplayFirstMethodExample();
+                        break;
                     case 0:
                         repeat = false;
                         break;
@@ -53,6 +57,23 @@ namespace SyntaxTreeExample
             
             
 
+        }
+
+        private static void DisplayFirstMethodExample()
+        {
+            var tree = CSharpSyntaxTree.ParseText(File.ReadAllText("../../../Program.cs"));
+            var method = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First();
+            Console.WriteLine("Method Name: {0}", method.Identifier);
+            Console.WriteLine("Return Type: {0}", method.ReturnType);
+
+            // display modifiers
+            Console.Write("Modifiers: ");
+            foreach (var modifier in method.Modifiers)
+                Console.Write(" {0}", modifier.Text);
+            Console.WriteLine();
+
+            Console.WriteLine("Parameters: {0}", method.ParameterList);
+            Console.WriteLine("Body: {0}", method.Body);
         }
 
         private static void DisplayFirstErrorExample()
