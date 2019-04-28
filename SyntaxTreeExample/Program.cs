@@ -22,7 +22,8 @@ namespace SyntaxTreeExample
                 Console.WriteLine("2 - Class Created in Design Time Example");
                 Console.WriteLine("3 - Display First Error Example");
                 Console.WriteLine("4 - Display First Method");
-                Console.WriteLine("5 - Change MEthod Return Type Example");
+                Console.WriteLine("5 - Change Method Return Type Example");
+                Console.WriteLine("6 - Find The Class Name That Contains Method Example");
                 Console.WriteLine("0 - Exit");
                 Console.Write("\nChoose option: ");
 
@@ -47,6 +48,9 @@ namespace SyntaxTreeExample
                     case 5:
                         ChangeMethodReturnTypeExample();
                         break;
+                    case 6:
+                        DisplayTypeThatContainsMethodExample();
+                        break;
                     case 0:
                         repeat = false;
                         break;
@@ -61,6 +65,31 @@ namespace SyntaxTreeExample
             
             
 
+        }
+
+        private static void DisplayTypeThatContainsMethodExample()
+        {
+            var tree = CSharpSyntaxTree.ParseText(@"
+                        public class MyClass
+                        {
+                            public void MyMethod()
+                            {
+                            }
+                            public void MyMethod(int n)
+                            {
+                            }
+                        }");
+
+            var syntaxRoot = tree.GetRoot();
+
+            //match first method with parameters
+            var myMethod = syntaxRoot.DescendantNodes().OfType<MethodDeclarationSyntax>()
+                .Where(m => m.ParameterList.Parameters.Any())
+                .First();
+
+            //find the type that contains this method
+            var containingType = myMethod.Ancestors().OfType<TypeDeclarationSyntax>().First();
+            Console.WriteLine("ContainingType: {0}", containingType.Identifier);
         }
 
         private static void ChangeMethodReturnTypeExample()
