@@ -22,6 +22,7 @@ namespace SyntaxTreeExample
                 Console.WriteLine("2 - Class Created in Design Time Example");
                 Console.WriteLine("3 - Display First Error Example");
                 Console.WriteLine("4 - Display First Method");
+                Console.WriteLine("5 - Change MEthod Return Type Example");
                 Console.WriteLine("0 - Exit");
                 Console.Write("\nChoose option: ");
 
@@ -43,6 +44,9 @@ namespace SyntaxTreeExample
                     case 4:
                         DisplayFirstMethodExample();
                         break;
+                    case 5:
+                        ChangeMethodReturnTypeExample();
+                        break;
                     case 0:
                         repeat = false;
                         break;
@@ -57,6 +61,16 @@ namespace SyntaxTreeExample
             
             
 
+        }
+
+        private static void ChangeMethodReturnTypeExample()
+        {
+            var tree = CSharpSyntaxTree.ParseText("class C{ void Method(){}}");
+            var root = tree.GetRoot();
+            var method = root.DescendantNodes().OfType<MethodDeclarationSyntax>().First();
+            var returnType = SyntaxFactory.ParseTypeName("string ");
+            var newMethod = method.WithReturnType(returnType);
+            Console.WriteLine(newMethod);
         }
 
         private static void DisplayFirstMethodExample()
