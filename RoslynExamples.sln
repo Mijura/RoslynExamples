@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyntaxTreeExample", "SyntaxTreeExample\SyntaxTreeExample.csproj", "{2ACE6FEA-351C-4365-932B-CE0939F799EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyntaxTreeExample", "SyntaxTreeExample\SyntaxTreeExample.csproj", "{2ACE6FEA-351C-4365-932B-CE0939F799EB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeGenerator", "CodeGenerator\CodeGenerator.csproj", "{175C3D6B-C9E0-4987-81B5-DAA0ED04B163}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SymbolApiExample", "SymbolApiExample\SymbolApiExample.csproj", "{823FEF54-69E9-46E9-98FE-BE20C0062872}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SymbolApiExample", "SymbolApiExample\SymbolApiExample.csproj", "{823FEF54-69E9-46E9-98FE-BE20C0062872}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
