@@ -26,6 +26,8 @@ namespace SyntaxTreeExample
                 Console.WriteLine("6 - Find The Class Name That Contains Method Example");
                 Console.WriteLine("7 - Visit Only Classes And Methods Declaration Example");
                 Console.WriteLine("8 - Visit Only Tokens Example");
+                Console.WriteLine("9 - Empty Statement Removal Example");
+                Console.WriteLine("10 - Semicolon Removal Example");
                 Console.WriteLine("0 - Exit");
                 Console.Write("\nChoose option: ");
 
@@ -59,6 +61,9 @@ namespace SyntaxTreeExample
                     case 8:
                         VisitOnlyTokensExample();
                         break;
+                    case 9:
+                        EmptyStatementRemovalExample();
+                        break;
                     case 0:
                         repeat = false;
                         break;
@@ -72,6 +77,28 @@ namespace SyntaxTreeExample
             }
             
             
+
+        }
+
+        private static void EmptyStatementRemovalExample()
+        {
+            // A syntax tree with an unnecessary semicolon on its own line
+             var tree = CSharpSyntaxTree.ParseText(@"
+                public class Sample
+                {
+                    // Method prints empty line
+                    public void Foo()
+                    {
+                        Console.WriteLine();
+                        // comment 1
+                        ; 
+                        // comment 2
+                    }
+                }");
+
+            var rewriter = new EmptyStatementRemoval();
+            var result = rewriter.Visit(tree.GetRoot()); //this will create new root node!
+            Console.WriteLine(result.ToFullString()); // comment 1 will be removed also!
 
         }
 
