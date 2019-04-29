@@ -25,6 +25,7 @@ namespace SyntaxTreeExample
                 Console.WriteLine("5 - Change Method Return Type Example");
                 Console.WriteLine("6 - Find The Class Name That Contains Method Example");
                 Console.WriteLine("7 - Visit Only Classes And Methods Declaration Example");
+                Console.WriteLine("8 - Visit Only Tokens Example");
                 Console.WriteLine("0 - Exit");
                 Console.Write("\nChoose option: ");
 
@@ -55,6 +56,9 @@ namespace SyntaxTreeExample
                     case 7:
                         VisitOnlyClassAndMethodsDeclarationsExample();
                         break;
+                    case 8:
+                        VisitOnlyTokensExample();
+                        break;
                     case 0:
                         repeat = false;
                         break;
@@ -69,6 +73,22 @@ namespace SyntaxTreeExample
             
             
 
+        }
+
+        private static void VisitOnlyTokensExample()
+        {
+            var tree = CSharpSyntaxTree.ParseText(@"
+                public class MyClass
+                {
+                    public void Main()
+                    {
+                    }
+                }
+            ");
+
+            var walker = new TokenWalker();
+            walker.Visit(tree.GetRoot());
+            Console.WriteLine(walker.sb.ToString());
         }
 
         private static void VisitOnlyClassAndMethodsDeclarationsExample()
