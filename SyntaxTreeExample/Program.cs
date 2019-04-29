@@ -24,6 +24,7 @@ namespace SyntaxTreeExample
                 Console.WriteLine("4 - Display First Method");
                 Console.WriteLine("5 - Change Method Return Type Example");
                 Console.WriteLine("6 - Find The Class Name That Contains Method Example");
+                Console.WriteLine("7 - Visit Only Classes And Methods Declaration Example");
                 Console.WriteLine("0 - Exit");
                 Console.Write("\nChoose option: ");
 
@@ -51,6 +52,9 @@ namespace SyntaxTreeExample
                     case 6:
                         DisplayTypeThatContainsMethodExample();
                         break;
+                    case 7:
+                        VisitOnlyClassAndMethodsDeclarationsExample();
+                        break;
                     case 0:
                         repeat = false;
                         break;
@@ -65,6 +69,27 @@ namespace SyntaxTreeExample
             
             
 
+        }
+
+        private static void VisitOnlyClassAndMethodsDeclarationsExample()
+        {
+            var tree = CSharpSyntaxTree.ParseText(@"
+                public class MyClass
+                {
+                    public void MyMethod()
+                    {
+                    }
+                }
+                public class MyOtherClass
+                {
+                    public void MyMethod(int n)
+                    {
+                    }
+                }
+            ");
+
+            var walker = new ClassMethodWalker();
+            walker.Visit(tree.GetRoot());
         }
 
         private static void DisplayTypeThatContainsMethodExample()
