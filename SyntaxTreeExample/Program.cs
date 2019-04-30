@@ -64,6 +64,9 @@ namespace SyntaxTreeExample
                     case 9:
                         EmptyStatementRemovalExample();
                         break;
+                    case 10:
+                        SenicolonRemovalExample();
+                        break;
                     case 0:
                         repeat = false;
                         break;
@@ -80,10 +83,31 @@ namespace SyntaxTreeExample
 
         }
 
+        private static void SenicolonRemovalExample()
+        {
+            // A syntax tree with an unnecessary semicolon on its own line
+            var tree = CSharpSyntaxTree.ParseText(@"
+                public class Sample
+                {
+                    // Method prints empty line
+                    public void Foo()
+                    {
+                        Console.WriteLine();
+                        // comment 1
+                        ; 
+                        // comment 2
+                    }
+                }");
+
+            var rewriter = new SemicolonRemovalExample();
+            var result = rewriter.Visit(tree.GetRoot());
+            Console.WriteLine(result.ToFullString());
+        }
+
         private static void EmptyStatementRemovalExample()
         {
             // A syntax tree with an unnecessary semicolon on its own line
-             var tree = CSharpSyntaxTree.ParseText(@"
+            var tree = CSharpSyntaxTree.ParseText(@"
                 public class Sample
                 {
                     // Method prints empty line
