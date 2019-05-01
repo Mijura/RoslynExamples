@@ -18,16 +18,17 @@ namespace SyntaxTreeExample
         {
             var repeat = true;
             while (repeat) {
-                Console.WriteLine("1 - Display Syntax Tree Example");
-                Console.WriteLine("2 - Class Created in Design Time Example");
-                Console.WriteLine("3 - Display First Error Example");
+                Console.WriteLine("1 - Display Syntax Tree");
+                Console.WriteLine("2 - Class Created in Design Time");
+                Console.WriteLine("3 - Display First Error");
                 Console.WriteLine("4 - Display First Method");
-                Console.WriteLine("5 - Change Method Return Type Example");
-                Console.WriteLine("6 - Find The Class Name That Contains Method Example");
-                Console.WriteLine("7 - Visit Only Classes And Methods Declaration Example");
-                Console.WriteLine("8 - Visit Only Tokens Example");
-                Console.WriteLine("9 - Empty Statement Removal Example");
-                Console.WriteLine("10 - Semicolon Removal Example");
+                Console.WriteLine("5 - Change Method Return Type");
+                Console.WriteLine("6 - Find The Class Name That Contains Method");
+                Console.WriteLine("7 - Visit Only Classes And Methods Declaration");
+                Console.WriteLine("8 - Visit Only Tokens");
+                Console.WriteLine("9 - Empty Statement Removal");
+                Console.WriteLine("10 - Semicolon Removal");
+                Console.WriteLine("11 - Add Curly Brackets To If Statement");
                 Console.WriteLine("0 - Exit");
                 Console.Write("\nChoose option: ");
 
@@ -67,6 +68,9 @@ namespace SyntaxTreeExample
                     case 10:
                         SenicolonRemovalExample();
                         break;
+                    case 11:
+                        AddCurlyBracketsToIfStatementExample();
+                        break;
                     case 0:
                         repeat = false;
                         break;
@@ -81,6 +85,24 @@ namespace SyntaxTreeExample
             
             
 
+        }
+
+        private static void AddCurlyBracketsToIfStatementExample()
+        {
+            var tree = CSharpSyntaxTree.ParseText(@"
+                public class Program
+                {
+                    public static void Main()
+                    {
+                        if(true)
+                            Console.WriteLine(""It was true!"");
+                    }
+                }");
+
+            var root = tree.GetRoot();
+            IfRewriter rewriter = new IfRewriter();
+            var newRoot = rewriter.Visit(root);
+            Console.WriteLine(newRoot.ToFullString());
         }
 
         private static void SenicolonRemovalExample()
